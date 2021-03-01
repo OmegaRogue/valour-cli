@@ -1,4 +1,20 @@
 import axios from "axios";
+import url from "url";
+import prompt from "prompt";
+
+
+prompt.start();
+
+
+prompt.get(['username', 'email'], function (err, result) {
+    if (err) {
+        return onErr(err);
+    }
+    console.log('Command-line input received:');
+    console.log('  Username: ' + result.username);
+    console.log('  Email: ' + result.email);
+});
+
 
 const valour = axios.create({
     baseURL: 'https://valour.gg/',
@@ -10,3 +26,6 @@ const valour = axios.create({
         'Connection': 'keep-alive'
     }
 });
+
+const params = new url.URLSearchParams({email: 'bar'});
+valour.get("User/RequestStandardToken")
